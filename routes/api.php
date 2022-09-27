@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
-use App\Http\Controllers\DrawingController;
+use App\Http\Controllers\PrizeDrawController;
 
 
 /*
@@ -17,7 +17,15 @@ use App\Http\Controllers\DrawingController;
 |
 */
 
+Route::get('/', function () {
+    return [
+        'status' => 'success',
+        'message' => 'Welcome to the API.'
+    ];
+});
+
 Route::post('/create-ticket', [TicketController::class, 'createTicket'])->name('create-ticket');
 Route::get('/ticket/{ticketCode}', [TicketController::class, 'getTicket'])->name('get-ticket');
 
-Route::resource('drawings', DrawingController::class);
+Route::resource('prize-draw', PrizeDrawController::class);
+Route::put('/prize-draw/{id}/update-status', [PrizeDrawController::class, 'updateStatus'])->name('prize-draw.update-status');

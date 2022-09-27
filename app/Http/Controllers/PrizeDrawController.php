@@ -3,24 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Drawing;
-use App\Http\Requests\SaveDrawingRequest;
-use App\Http\Requests\GetDrawingRequest;
+use App\Models\PrizeDraw;
+use App\Http\Requests\SavePrizeDrawRequest;
+use App\Http\Requests\GetPrizeDrawRequest;
+use App\Http\Requests\UpdateStatusPrizeDrawRequest;
+use App\Http\Resources\GetPrizeDrawResource;
 
-class DrawingController extends Controller
+class PrizeDrawController extends Controller
 {
 
     /**
      *  @OA\Tag(
-     *      name="Drawings",
-     *      description="Drawings"
+     *      name="PrizeDraws",
+     *      description="PrizeDraws"
      *  ),
      *
      *
-     * @OA\Get(path="/api/drawings",
-     *      tags={"Drawings"},
-     *      operationId="getDrawings",
-     *      description="List all drawings with pagination",
+     * @OA\Get(path="/api/prize-draw",
+     *      tags={"PrizeDraws"},
+     *      operationId="getPrizeDraws",
+     *      description="List all prize-draw with pagination",
      *      security={{"bearerAuth":{}}},
      *      @OA\Response(
      *          response=200,
@@ -28,7 +30,7 @@ class DrawingController extends Controller
      *       ),
      *      @OA\Response(
      *          response=404,
-     *          description="Drawing not found"
+     *          description="PrizeDraw not found"
      *       ),
      *      @OA\Response(
      *          response=500,
@@ -42,39 +44,39 @@ class DrawingController extends Controller
     public function index()
     {
         try {
-            return Drawing::paginate(10);
+            return GetPrizeDrawResource::collection(PrizeDraw::paginate(10));
 
         } catch (\Throwable $th) {
             return [
                 'status' => 'error',
-                'message' => 'Error getting drawings.'
+                'message' => 'Error getting prize-draw.'
             ];
         }
     }
 
     public function create()
     {
-        return view('drawings.create');
+        return view('prize-draw.create');
     }
 
 
      /**
      *  @OA\Tag(
-     *      name="Drawings",
-     *      description="Drawings"
+     *      name="PrizeDraws",
+     *      description="PrizeDraws"
      *  ),
      *
      *
-     * @OA\Post(path="/api/drawings",
-     *      tags={"Drawings"},
+     * @OA\Post(path="/api/prize-draw",
+     *      tags={"PrizeDraws"},
      *      summary="Create a drawing",
      *      description="Create a drawing",
-     *      operationId="drawings",
+     *      operationId="prize-draw",
      *      description="Create a drawing",
      *      security={{"bearerAuth":{}}},
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/SaveDrawingRequest")
+     *          @OA\JsonContent(ref="#/components/schemas/SavePrizeDrawRequest")
      *      ),
      *      @OA\Response(
      *          response=200,
@@ -88,13 +90,13 @@ class DrawingController extends Controller
      */
 
 
-    public function store(SaveDrawingRequest $request)
+    public function store(SavePrizeDrawRequest $request)
     {
         try {
-            Drawing::create($request->all());
+            PrizeDraw::create($request->all());
             return [
                 'status' => 'success',
-                'message' => 'Drawing created successfully.'
+                'message' => 'PrizeDraw created successfully.'
             ];
         } catch (\Throwable $th) {
             return [
@@ -108,14 +110,14 @@ class DrawingController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/drawings/{id}",
-     *      operationId="getDrawingById",
-     *      tags={"Drawings"},
+     *      path="/api/prize-draw/{id}",
+     *      operationId="getPrizeDrawById",
+     *      tags={"PrizeDraws"},
      *      summary="Get especific drawing",
      *      description="Returns drawing data",
      *      @OA\Parameter(
      *          name="id",
-     *          description="Drawing id",
+     *          description="PrizeDraw id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -129,7 +131,7 @@ class DrawingController extends Controller
      *       ),
      *      @OA\Response(
      *          response=404,
-     *          description="Drawing not found"
+     *          description="PrizeDraw not found"
      *       ),
      *      @OA\Response(
      *          response=500,
@@ -138,10 +140,10 @@ class DrawingController extends Controller
      *     )
      */
 
-    public function show(GetDrawingRequest $request)
+    public function show(GetPrizeDrawRequest $request)
     {
        try {
-            return Drawing::find($request->id);
+            return new GetPrizeDrawResource(PrizeDraw::find($request->id));
         } catch (\Throwable $th) {
             return [
                 'status' => 'error',
@@ -152,21 +154,21 @@ class DrawingController extends Controller
 
     public function edit($id)
     {
-        return view('drawings.edit', compact('drawing'));
+        return view('prize-draw.edit', compact('drawing'));
     }
 
 
     /**
      * @OA\Put(
-     *      path="/api/drawings/{id}",
-     *      operationId="updateDrawing",
-     *      tags={"Drawings"},
+     *      path="/api/prize-draw/{id}",
+     *      operationId="updatePrizeDraw",
+     *      tags={"PrizeDraws"},
      *      summary="Update existing drawing",
      *      description="Returns updated drawing data",
      *      security={{"bearerAuth":{}}},
      *      @OA\Parameter(
      *          name="id",
-     *          description="Drawing id",
+     *          description="PrizeDraw id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -176,7 +178,7 @@ class DrawingController extends Controller
      *      ),
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/SaveDrawingRequest")
+     *          @OA\JsonContent(ref="#/components/schemas/SavePrizeDrawRequest")
      *      ),
      *      @OA\Response(
      *          response=200,
@@ -184,7 +186,7 @@ class DrawingController extends Controller
      *       ),
      *      @OA\Response(
      *          response=404,
-     *          description="Drawing not found"
+     *          description="PrizeDraw not found"
      *       ),
      *      @OA\Response(
      *          response=500,
@@ -194,15 +196,15 @@ class DrawingController extends Controller
      */
 
 
-    public function update(SaveDrawingRequest $request, $id)
+    public function update(SavePrizeDrawRequest $request, $id)
     {
 
         try {
 
-            Drawing::find($id)->update($request->all());
+            PrizeDraw::find($id)->update($request->all());
             return [
                 'status' => 'success',
-                'message' => 'Drawing updated successfully.'
+                'message' => 'PrizeDraw updated successfully.'
             ];
         } catch (\Throwable $th) {
             return [
@@ -217,15 +219,15 @@ class DrawingController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/drawings/{id}",
-     *      operationId="deleteDrawing",
-     *      tags={"Drawings"},
+     *      path="/api/prize-draw/{id}",
+     *      operationId="deletePrizeDraw",
+     *      tags={"PrizeDraws"},
      *      summary="Delete existing drawing",
      *      description="Deletes a record and returns no content",
      *      security={{"bearerAuth":{}}},
      *      @OA\Parameter(
      *          name="id",
-     *          description="Drawing id",
+     *          description="PrizeDraw id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -239,7 +241,7 @@ class DrawingController extends Controller
      *       ),
      *      @OA\Response(
      *          response=404,
-     *          description="Drawing not found"
+     *          description="PrizeDraw not found"
      *       ),
      *      @OA\Response(
      *          response=500,
@@ -254,7 +256,7 @@ class DrawingController extends Controller
             $drawing->delete();
             return [
                 'status' => 'success',
-                'message' => 'Drawing deleted successfully.'
+                'message' => 'PrizeDraw deleted successfully.'
             ];
         } catch (\Throwable $th) {
             return [
@@ -263,6 +265,61 @@ class DrawingController extends Controller
             ];
         }
 
+    }
+
+
+    /**
+     * @OA\Put(
+     *      path="/api/prize-draw/{id}/update-status",
+     *      tags={"PrizeDraws"},
+     *      summary="Update status of a drawing",
+     *      description="Returns updated drawing data",
+     *      operationId="updateStatusPrizeDraw",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="PrizeDraw id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/UpdateStatusPrizeDrawRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="PrizeDraw not found"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Server error"
+     *       )
+     *     )
+     *
+     *
+     */
+
+    public function updateStatus(UpdateStatusPrizeDrawRequest $request)
+    {
+        try {
+            PrizeDraw::find($request->id)->update(['status' => $request->status]);
+            return [
+                'status' => 'success',
+                'message' => 'PrizeDraw updated successfully.'
+            ];
+        } catch (\Throwable $th) {
+            return [
+                'status' => 'error',
+                'message' => 'Error updating drawing.'
+            ];
+        }
     }
 
 }

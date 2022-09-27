@@ -9,9 +9,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Ticket;
-use App\Models\Drawing;
+use App\Models\PrizeDraw;
 
-class RunRaffle implements ShouldQueue
+class RunPrizeDraw implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -37,13 +37,13 @@ class RunRaffle implements ShouldQueue
 
         $numbers = $this->generateWinningNumbers();
 
-        $drawings = Drawing::where('status', 1)->first();
+        $prizeDraw = PrizeDraw::where('status', PrizeDraw::STATUS_ACTIVE)->first();
 
-        if(!$drawings) {
+        if(!$prizeDraw) {
             return;
         }
 
-        $tickets = Ticket::where('drawing_id', $drawings->id)->get();
+        $tickets = Ticket::where('drawing_id', $prizeDraw->id)->get();
 
         foreach ($tickets as $ticket) {
             if ($ticket->n1 == $numbers[0] || $ticket->n1 == $numbers[1] || $ticket->n1 == $numbers[2] || $ticket->n1 == $numbers[3] || $ticket->n1 == $numbers[4] || $ticket->n1 == $numbers[5]) {
@@ -56,14 +56,14 @@ class RunRaffle implements ShouldQueue
         }
 
 
-        $drawings->status = 0;
-        $drawings->n1 = $numbers[0];
-        $drawings->n2 = $numbers[1];
-        $drawings->n3 = $numbers[2];
-        $drawings->n4 = $numbers[3];
-        $drawings->n5 = $numbers[4];
-        $drawings->n6 = $numbers[5];
-        $drawings->save();
+        $prizeDraw->status = PrizeDraw::STATUS_FINISHED;
+        $prizeDraw->n1 = $numbers[0];
+        $prizeDraw->n2 = $numbers[1];
+        $prizeDraw->n3 = $numbers[2];
+        $prizeDraw->n4 = $numbers[3];
+        $prizeDraw->n5 = $numbers[4];
+        $prizeDraw->n6 = $numbers[5];
+        $prizeDraw->save();
 
     }
 

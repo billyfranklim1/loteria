@@ -89,11 +89,11 @@ class Ticket
 
     /**
      * @OA\Property(
-     *     title="Drawings",
-     *     description="Ticket drawings's user model"
+     *     title="PrizeDraws",
+     *     description="Ticket prize-draw's user model"
      * )
      *
-     * @var \App\Virtual\Models\Drawing
+     * @var \App\Virtual\Models\PrizeDraw
      */
-    private $drawings;
+    private $prizeDraw;
 }

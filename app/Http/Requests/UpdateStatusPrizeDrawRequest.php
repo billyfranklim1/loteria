@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Contracts\Validation\Validator;
 
 
-class SaveDrawingRequest extends FormRequest
+class UpdateStatusPrizeDrawRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,10 +28,6 @@ class SaveDrawingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|min:3',
-            'description' => 'required|string|max:255|min:3',
-            'date_start' => 'required|date',
-            'date_end' => 'required|date|after_or_equal:date_start',
             'status' => 'in:pending,active,finished',
         ];
     }

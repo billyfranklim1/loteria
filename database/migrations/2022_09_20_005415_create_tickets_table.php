@@ -24,7 +24,7 @@ class CreateTicketsTable extends Migration
             $table->integer('n5');
             $table->integer('n6');
             $table->enum('status', ['pending', 'win', 'lose'])->default('pending');
-            $table->foreignId('drawing_id')->constrained('drawings')->onDelete('cascade');
+            $table->foreignId('prize_draw_id')->constrained('prize_draws')->onDelete('cascade');
             $table->timestamps();
         });
 

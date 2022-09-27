@@ -4,9 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Drawing;
+use App\Models\PrizeDraw;
 
-class DrawingFactory extends Factory
+class PrizeDrawFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +18,6 @@ class DrawingFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
-            'date_start' => $this->faker->date(),
-            'date_end' => $this->faker->date(),
             'status' => 1,
         ];
     }

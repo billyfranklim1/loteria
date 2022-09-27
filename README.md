@@ -11,7 +11,7 @@ Access  documentation Swagger [here](http://127.0.0.1:8000/api/documentation).
 
 Clone the repository
 
-    git clone https://github.com/billyfranklim1/backend-challenge.git
+    git clone https://github.com/billyfranklim1/loteria.git
 
 Switch to the repo folder
 
@@ -50,11 +50,15 @@ Run the database seeder and you're done
 
     php artisan serve
 
-You can now access the server at http://127.0.0.1:8000
+## Generate documentation
+
+    php artisan l5-swagger:generate
+
+You can now access the server at http://127.0.0.1:8000/api/documentation
 
 **TL;DR command list**
 
-    git clone https://github.com/billyfranklim1/backend-challenge.git
+    git clone https://github.com/billyfranklim1/loteria.git
     cd backend-challenge
     cp .env.example .env
     php artisan migrate
@@ -80,14 +84,21 @@ Access documentation [here](http://127.0.0.1:8000/api/documentation).
 
 # Run Command for generate the numbers winners
 
-    php artisan send:run-raffle
+    php artisan send:run-prize-draw
+
+
+# Run Command for generate the numbers winners seting the winning  code
+
+    php artisan send:run-prize-draw --code={ticketCode}
+
+    **Example: php artisan send:run-prize-draw --code=1234-abcd**
     
 ## Docker
 
 To install with [Docker](https://www.docker.com), run following commands:
 
 ```
-git clone https://github.com/billyfranklim1/backend-challenge.git
+git clone https://github.com/billyfranklim1/loteria.git
 cd backend-challenge
 cp .env.example .env
 docker-compose up -d

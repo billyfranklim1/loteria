@@ -4,14 +4,14 @@ namespace App\Virtual\Models;
 
 /**
  * @OA\Schema(
- *     title="Drawing",
- *     description="Drawing model",
+ *     title="PrizeDraw",
+ *     description="PrizeDraw model",
  *     @OA\Xml(
- *         name="Drawing"
+ *         name="PrizeDraw"
  *     )
  * )
  */
-class Drawing
+class PrizeDraw
 {
 
     /**
@@ -48,30 +48,6 @@ class Drawing
      */
     public $description;
 
-
-    /**
-     * @OA\Property(
-     *      title="date_start",
-     *      description="status of the new Ticket",
-     *      example="This is new Ticket's date_start"
-     * )
-     *
-     * @var date
-     */
-    public $date_start;
-
-
-    /**
-     * @OA\Property(
-     *      title="date_end",
-     *      description="status of the new Ticket",
-     *      example="This is new Ticket's date_end"
-     * )
-     *
-     * @var date
-     */
-
-    public $date_end;
 
     /**
      * @OA\Property(
@@ -130,7 +106,7 @@ class Drawing
      *
      * @var integer
      */
-    
+
     public $n4;
 
     /**
@@ -155,7 +131,7 @@ class Drawing
      * @var integer
      */
     public $n6;
-    
+
 
 
     /**

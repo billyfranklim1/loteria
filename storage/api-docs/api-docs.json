@@ -17,19 +17,19 @@
     ],
     "paths": {
         "/api/app": {},
-        "/api/drawings": {
+        "/api/prize-draw": {
             "get": {
                 "tags": [
-                    "Drawings"
+                    "PrizeDraws"
                 ],
-                "description": "List all drawings with pagination",
-                "operationId": "getDrawings",
+                "description": "List all prize-draw with pagination",
+                "operationId": "getPrizeDraws",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
                     },
                     "404": {
-                        "description": "Drawing not found"
+                        "description": "PrizeDraw not found"
                     },
                     "500": {
                         "description": "Server error"
@@ -43,17 +43,17 @@
             },
             "post": {
                 "tags": [
-                    "Drawings"
+                    "PrizeDraws"
                 ],
                 "summary": "Create a drawing",
                 "description": "Create a drawing",
-                "operationId": "drawings",
+                "operationId": "prize-draw",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/SaveDrawingRequest"
+                                "$ref": "#/components/schemas/SavePrizeDrawRequest"
                             }
                         }
                     }
@@ -73,19 +73,19 @@
                 ]
             }
         },
-        "/api/drawings/{id}": {
+        "/api/prize-draw/{id}": {
             "get": {
                 "tags": [
-                    "Drawings"
+                    "PrizeDraws"
                 ],
                 "summary": "Get especific drawing",
                 "description": "Returns drawing data",
-                "operationId": "getDrawingById",
+                "operationId": "getPrizeDrawById",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Drawing id",
+                        "description": "PrizeDraw id",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -98,7 +98,7 @@
                         "description": "Successful operation"
                     },
                     "404": {
-                        "description": "Drawing not found"
+                        "description": "PrizeDraw not found"
                     },
                     "500": {
                         "description": "Server error"
@@ -107,16 +107,16 @@
             },
             "put": {
                 "tags": [
-                    "Drawings"
+                    "PrizeDraws"
                 ],
                 "summary": "Update existing drawing",
                 "description": "Returns updated drawing data",
-                "operationId": "updateDrawing",
+                "operationId": "updatePrizeDraw",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Drawing id",
+                        "description": "PrizeDraw id",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -129,7 +129,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/SaveDrawingRequest"
+                                "$ref": "#/components/schemas/SavePrizeDrawRequest"
                             }
                         }
                     }
@@ -139,7 +139,7 @@
                         "description": "Successful operation"
                     },
                     "404": {
-                        "description": "Drawing not found"
+                        "description": "PrizeDraw not found"
                     },
                     "500": {
                         "description": "Server error"
@@ -153,16 +153,16 @@
             },
             "delete": {
                 "tags": [
-                    "Drawings"
+                    "PrizeDraws"
                 ],
                 "summary": "Delete existing drawing",
                 "description": "Deletes a record and returns no content",
-                "operationId": "deleteDrawing",
+                "operationId": "deletePrizeDraw",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Drawing id",
+                        "description": "PrizeDraw id",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -175,7 +175,7 @@
                         "description": "Successful operation"
                     },
                     "404": {
-                        "description": "Drawing not found"
+                        "description": "PrizeDraw not found"
                     },
                     "500": {
                         "description": "Server error"
@@ -186,6 +186,49 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/prize-draw/{id}/update-status": {
+            "put": {
+                "tags": [
+                    "PrizeDraws"
+                ],
+                "summary": "Update status of a drawing",
+                "description": "Returns updated drawing data",
+                "operationId": "updateStatusPrizeDraw",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "PrizeDraw id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateStatusPrizeDrawRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "PrizeDraw not found"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
             }
         },
         "/api/create-ticket": {
@@ -251,9 +294,9 @@
     },
     "components": {
         "schemas": {
-            "Drawing": {
-                "title": "Drawing",
-                "description": "Drawing model",
+            "PrizeDraw": {
+                "title": "PrizeDraw",
+                "description": "PrizeDraw model",
                 "properties": {
                     "id": {
                         "title": "ID",
@@ -273,20 +316,6 @@
                         "description": "description of the new Ticket",
                         "type": "string",
                         "example": "This is new Ticket's description"
-                    },
-                    "date_start": {
-                        "title": "date_start",
-                        "description": "status of the new Ticket",
-                        "type": "string",
-                        "format": "date",
-                        "example": "This is new Ticket's date_start"
-                    },
-                    "date_end": {
-                        "title": "date_end",
-                        "description": "status of the new Ticket",
-                        "type": "string",
-                        "format": "date",
-                        "example": "This is new Ticket's date_end"
                     },
                     "status": {
                         "title": "status",
@@ -347,7 +376,7 @@
                 },
                 "type": "object",
                 "xml": {
-                    "name": "Drawing"
+                    "name": "PrizeDraw"
                 }
             },
             "Ticket": {
@@ -393,8 +422,8 @@
                         "format": "datetime",
                         "example": "2020-01-27 17:50:45"
                     },
-                    "drawings": {
-                        "$ref": "#/components/schemas/Drawing"
+                    "prizeDraw": {
+                        "$ref": "#/components/schemas/PrizeDraw"
                     }
                 },
                 "type": "object",
@@ -420,7 +449,7 @@
                     "name": "TicketResource"
                 }
             },
-            "SaveDrawingRequest": {
+            "SavePrizeDrawRequest": {
                 "title": "Store drawing request",
                 "description": "Store drawing request body data",
                 "required": [
@@ -431,25 +460,13 @@
                         "title": "name",
                         "description": "name of the new drawing",
                         "type": "string",
-                        "example": "Drawing 1"
+                        "example": "PrizeDraw 1"
                     },
                     "description": {
                         "title": "description",
                         "description": "description of the new drawing",
                         "type": "string",
-                        "example": "Drawing 1 is the first drawing"
-                    },
-                    "date_start": {
-                        "title": "date_start",
-                        "description": "date_start of the new drawing",
-                        "type": "string",
-                        "example": "2021-01-01"
-                    },
-                    "date_end": {
-                        "title": "date_end",
-                        "description": "date_end of the new drawing",
-                        "type": "string",
-                        "example": "2021-01-01"
+                        "example": "PrizeDraw 1 is the first drawing"
                     }
                 },
                 "type": "object"
@@ -505,17 +522,33 @@
                     }
                 },
                 "type": "object"
+            },
+            "UpdateStatusPrizeDrawRequest": {
+                "title": "Update drawing request",
+                "description": "Update drawing request body data",
+                "required": [
+                    "status"
+                ],
+                "properties": {
+                    "status": {
+                        "title": "status",
+                        "description": "status of the drawing",
+                        "type": "string",
+                        "example": "active"
+                    }
+                },
+                "type": "object"
             }
         }
     },
     "tags": [
         {
-            "name": "Drawings",
-            "description": "Drawings"
+            "name": "PrizeDraws",
+            "description": "PrizeDraws"
         },
         {
-            "name": "Drawings",
-            "description": "Drawings"
+            "name": "PrizeDraws",
+            "description": "PrizeDraws"
         },
         {
             "name": "Tickets",
@@ -530,7 +563,7 @@
         {
             "name": "Sorteios",
             "tags": [
-                "drawings"
+                "prize-draw"
             ]
         },
         {

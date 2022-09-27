@@ -5,15 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Drawing extends Model
+class PrizeDraw extends Model
 {
     use HasFactory;
+
+
+    const STATUS_PENDING = 'pending';
+    const STATUS_ACTIVE = 'active';
+    const STATUS_FINISHED = 'finished';
 
     protected $fillable = [
         'name',
         'description',
-        'date_start',
-        'date_end',
         'status',
         'n1',
         'n2',

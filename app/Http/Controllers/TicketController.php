@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\TicketNumber;
-use App\Models\Drawing;
+use App\Models\PrizeDraw;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Resources\CreateTicketResource;
 use App\Http\Resources\GetTicketResource;
@@ -41,7 +41,7 @@ class TicketController extends Controller
      */
     public function createTicket(StoreTicketRequest $request)
     {
-        $drawing = Drawing::where('status', 1)->first();
+        $drawing = PrizeDraw::where('status', PrizeDraw::STATUS_ACTIVE )->first();
         if (!$drawing) {
             return response()->json([
                 'message' => 'No active drawing',
@@ -52,7 +52,7 @@ class TicketController extends Controller
             'code' => $this->generateTicketCode(),
             'name' => $request->name,
             'status' => 'pending',
-            'drawing_id' => $this->getDrawingActive()->id,
+            'drawing_id' => $this->getPrizeDrawActive()->id,
             'n1' => $request->n1,
             'n2' => $request->n2,
             'n3' => $request->n3,
@@ -121,9 +121,9 @@ class TicketController extends Controller
     }
 
 
-    private function getDrawingActive()
+    private function getPrizeDrawActive()
     {
-        $drawing = Drawing::where('status', 1)->first();
+        $drawing = PrizeDraw::where('status', 1)->first();
 
         return $drawing;
     }

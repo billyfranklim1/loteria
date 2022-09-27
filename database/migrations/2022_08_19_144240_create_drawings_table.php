@@ -13,12 +13,10 @@ class CreateDrawingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('drawings', function (Blueprint $table) {
+        Schema::create('prize_draws', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->date('date_start');
-            $table->date('date_end');
             $table->enum('status', ['pending', 'active', 'finished'])->default('pending');
             $table->integer('n1')->nullable();
             $table->integer('n2')->nullable();
@@ -37,6 +35,6 @@ class CreateDrawingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drawings');
+        Schema::dropIfExists('prize_draws');
     }
 }

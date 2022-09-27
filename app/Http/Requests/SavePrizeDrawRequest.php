@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Contracts\Validation\Validator;
 
 
-class GetDrawingRequest extends FormRequest
+class SavePrizeDrawRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,13 +20,6 @@ class GetDrawingRequest extends FormRequest
         return true;
     }
 
-
-    public function prepareForValidation(){
-        $this->merge([
-            'id' => $this->route('drawing')
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -35,7 +28,9 @@ class GetDrawingRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer|exists:drawings,id',
+            'name' => 'required|string|max:255|min:3',
+            'description' => 'required|string|max:255|min:3',
+            'status' => 'in:pending,active,finished',
         ];
     }
 

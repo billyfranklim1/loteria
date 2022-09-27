@@ -30,7 +30,7 @@ use Illuminate\Routing\Controller as BaseController;
  * @OA\OpenApi(
  *      x={
  *          "tagGroups"={
- *              {"name"="Sorteios", "tags"={"drawings"}},
+ *              {"name"="Sorteios", "tags"={"prize-draw"}},
  *              {"name"="Ticket", "tags"={"tickets"}},
  *          }
  *      },

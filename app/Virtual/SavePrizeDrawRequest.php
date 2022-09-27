@@ -12,13 +12,13 @@ namespace App\Virtual;
  */
 
 
-class SaveDrawingRequest
+class SavePrizeDrawRequest
 {
     /**
      * @OA\Property(
      *      title="name",
      *      description="name of the new drawing",
-     *      example="Drawing 1"
+     *      example="PrizeDraw 1"
      * )
      *
      * @var string
@@ -29,35 +29,11 @@ class SaveDrawingRequest
      * @OA\Property(
      *      title="description",
      *      description="description of the new drawing",
-     *      example="Drawing 1 is the first drawing"
+     *      example="PrizeDraw 1 is the first drawing"
      * )
      *
      * @var string
      */
     public $description;
-
-    /**
-     * @OA\Property(
-     *      title="date_start",
-     *      description="date_start of the new drawing",
-     *      example="2021-01-01"
-     * )
-     *
-     * @var string
-     */
-
-    public $date_start;
-
-    /**
-     * @OA\Property(
-     *      title="date_end",
-     *      description="date_end of the new drawing",
-     *      example="2021-01-01"
-     * )
-     *
-     * @var string
-     */
-
-    public $date_end;
 
 }

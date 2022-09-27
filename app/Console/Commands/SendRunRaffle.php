@@ -3,23 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Jobs\RunRaffle;
+use App\Jobs\RunPrizeDraw;
 
-class SendRunRaffle extends Command
+class SendRunPrizeDraw extends Command
 {
     /**
      * The name and signature of the console command. with arguments optional
      *
      * @var string
      */
-    protected $signature = 'send:run-raffle {--code=}';
+    protected $signature = 'send:run-prize-draw {--code=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send run raffle';
+    protected $description = 'Send run prize draw';
 
     /**
      * Create a new command instance.
@@ -39,7 +39,7 @@ class SendRunRaffle extends Command
     public function handle()
     {
         $code = $this->option('code');
-        RunRaffle::dispatch($code);
+        RunPrizeDraw::dispatch($code);
         return 0;
     }
 }

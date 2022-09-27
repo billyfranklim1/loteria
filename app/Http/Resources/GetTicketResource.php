@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Drawing;
+use App\Models\PrizeDraw;
 
 class GetTicketResource extends JsonResource
 {
@@ -28,7 +28,7 @@ class GetTicketResource extends JsonResource
 
     public function getMachineNumbers()
     {
-        $drawing = Drawing::find($this->drawing_id);
+        $drawing = PrizeDraw::find($this->drawing_id);
 
         if($drawing) {
             return [$drawing->n1, $drawing->n2, $drawing->n3, $drawing->n4, $drawing->n5, $drawing->n6];
