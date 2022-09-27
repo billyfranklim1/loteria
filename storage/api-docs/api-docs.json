@@ -1,0 +1,543 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Loteria",
+        "description": "Api que simula uma loteria",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "0.0.4"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Ambiente de desenvolvimento do projeto da loteria localmente"
+        }
+    ],
+    "paths": {
+        "/api/app": {},
+        "/api/drawings": {
+            "get": {
+                "tags": [
+                    "Drawings"
+                ],
+                "description": "List all drawings with pagination",
+                "operationId": "getDrawings",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Drawing not found"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Drawings"
+                ],
+                "summary": "Create a drawing",
+                "description": "Create a drawing",
+                "operationId": "drawings",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SaveDrawingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns the message of the drawing created."
+                    },
+                    "402": {
+                        "description": "Error validating sent data."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/drawings/{id}": {
+            "get": {
+                "tags": [
+                    "Drawings"
+                ],
+                "summary": "Get especific drawing",
+                "description": "Returns drawing data",
+                "operationId": "getDrawingById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Drawing id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Drawing not found"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Drawings"
+                ],
+                "summary": "Update existing drawing",
+                "description": "Returns updated drawing data",
+                "operationId": "updateDrawing",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Drawing id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SaveDrawingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Drawing not found"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Drawings"
+                ],
+                "summary": "Delete existing drawing",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteDrawing",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Drawing id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Drawing not found"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/create-ticket": {
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "description": "Create a ticket",
+                "operationId": "createTicket",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTicketRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns the message of the ticket created."
+                    },
+                    "402": {
+                        "description": "Error validating sent data."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ticket/{ticketCode}": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "description": "Download model",
+                "operationId": "getTicket",
+                "parameters": [
+                    {
+                        "name": "ticketCode",
+                        "in": "path",
+                        "description": "Ticket code",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Ticket not found"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Drawing": {
+                "title": "Drawing",
+                "description": "Drawing model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of the new Ticket",
+                        "type": "string",
+                        "example": "A nice Ticket"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "description of the new Ticket",
+                        "type": "string",
+                        "example": "This is new Ticket's description"
+                    },
+                    "date_start": {
+                        "title": "date_start",
+                        "description": "status of the new Ticket",
+                        "type": "string",
+                        "format": "date",
+                        "example": "This is new Ticket's date_start"
+                    },
+                    "date_end": {
+                        "title": "date_end",
+                        "description": "status of the new Ticket",
+                        "type": "string",
+                        "format": "date",
+                        "example": "This is new Ticket's date_end"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "status of the new Ticket",
+                        "type": "boolean",
+                        "example": "This is new Ticket's status"
+                    },
+                    "n1": {
+                        "title": "n1",
+                        "description": "status of the new Ticket",
+                        "type": "integer",
+                        "example": "This is new Ticket's n1"
+                    },
+                    "n2": {
+                        "title": "n2",
+                        "description": "status of the new Ticket",
+                        "type": "integer",
+                        "example": "This is new Ticket's n2"
+                    },
+                    "n3": {
+                        "title": "n3",
+                        "description": "status of the new Ticket",
+                        "type": "integer",
+                        "example": "This is new Ticket's n3"
+                    },
+                    "n4": {
+                        "title": "n4",
+                        "description": "status of the new Ticket",
+                        "type": "integer",
+                        "example": "This is new Ticket's n4"
+                    },
+                    "n5": {
+                        "title": "n5",
+                        "description": "status of the new Ticket",
+                        "type": "integer",
+                        "example": "This is new Ticket's n5"
+                    },
+                    "n6": {
+                        "title": "n6",
+                        "description": "status of the new Ticket",
+                        "type": "integer",
+                        "example": "This is new Ticket's n6"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Drawing"
+                }
+            },
+            "Ticket": {
+                "title": "Ticket",
+                "description": "Ticket model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "code": {
+                        "title": "code",
+                        "description": "code of the new Ticket",
+                        "type": "string",
+                        "example": "A nice Ticket"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "status of the new Ticket",
+                        "type": "string",
+                        "example": "This is new Ticket's status"
+                    },
+                    "drawing_id": {
+                        "title": "drawing_id",
+                        "description": "status of the new Ticket",
+                        "type": "string",
+                        "example": "This is new Ticket's drawing_id"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "drawings": {
+                        "$ref": "#/components/schemas/Drawing"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Ticket"
+                }
+            },
+            "TicketResource": {
+                "title": "TicketResource",
+                "description": "Project resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Ticket"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "TicketResource"
+                }
+            },
+            "SaveDrawingRequest": {
+                "title": "Store drawing request",
+                "description": "Store drawing request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "name of the new drawing",
+                        "type": "string",
+                        "example": "Drawing 1"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "description of the new drawing",
+                        "type": "string",
+                        "example": "Drawing 1 is the first drawing"
+                    },
+                    "date_start": {
+                        "title": "date_start",
+                        "description": "date_start of the new drawing",
+                        "type": "string",
+                        "example": "2021-01-01"
+                    },
+                    "date_end": {
+                        "title": "date_end",
+                        "description": "date_end of the new drawing",
+                        "type": "string",
+                        "example": "2021-01-01"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTicketRequest": {
+                "title": "Store ticket request",
+                "description": "Store ticket request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "name of the new ticket",
+                        "type": "string",
+                        "example": "A nice ticket"
+                    },
+                    "n1": {
+                        "title": "n1",
+                        "description": "n1 of the new ticket",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "n2": {
+                        "title": "n2",
+                        "description": "n2 of the new ticket",
+                        "type": "integer",
+                        "example": "2"
+                    },
+                    "n3": {
+                        "title": "n3",
+                        "description": "n3 of the new ticket",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "n4": {
+                        "title": "n4",
+                        "description": "n4 of the new ticket",
+                        "type": "integer",
+                        "example": "4"
+                    },
+                    "n5": {
+                        "title": "n5",
+                        "description": "n5 of the new ticket",
+                        "type": "integer",
+                        "example": "5"
+                    },
+                    "n6": {
+                        "title": "n6",
+                        "description": "n6 of the new ticket",
+                        "type": "integer",
+                        "example": "6"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Drawings",
+            "description": "Drawings"
+        },
+        {
+            "name": "Drawings",
+            "description": "Drawings"
+        },
+        {
+            "name": "Tickets",
+            "description": "Tickets"
+        },
+        {
+            "name": "Tickets",
+            "description": "Tickets"
+        }
+    ],
+    "x-tagGroups": [
+        {
+            "name": "Sorteios",
+            "tags": [
+                "drawings"
+            ]
+        },
+        {
+            "name": "Ticket",
+            "tags": [
+                "tickets"
+            ]
+        }
+    ]
+}
