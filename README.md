@@ -15,7 +15,7 @@ Clone the repository
 
 Switch to the repo folder
 
-    cd backend-challenge
+    cd loteria
 
 
 Copy the example env file and make the required configuration changes in the .env file
@@ -59,7 +59,7 @@ You can now access the server at http://127.0.0.1:8000/api/documentation
 **TL;DR command list**
 
     git clone https://github.com/billyfranklim1/loteria.git
-    cd backend-challenge
+    cd loteria
     cp .env.example .env
     php artisan migrate
     php artisan db:seed
@@ -99,7 +99,7 @@ To install with [Docker](https://www.docker.com), run following commands:
 
 ```
 git clone https://github.com/billyfranklim1/loteria.git
-cd backend-challenge
+cd loteria
 cp .env.example .env
 docker-compose up -d
 docker-compose exec app php artisan config:clear
