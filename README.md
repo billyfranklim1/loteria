@@ -46,13 +46,14 @@ Run the database seeder and you're done
 
     php artisan db:seed
 
-## Start the local development server
-
-    php artisan serve
-
 ## Generate documentation
 
     php artisan l5-swagger:generate
+
+
+## Start the local development server
+
+    php artisan serve
 
 You can now access the server at http://127.0.0.1:8080/api/documentation
 
@@ -63,6 +64,7 @@ You can now access the server at http://127.0.0.1:8080/api/documentation
     cp .env.example .env
     php artisan migrate
     php artisan db:seed
+    php artisan l5-swagger:generate
     php artisan serve
 
 
@@ -109,6 +111,7 @@ docker-compose exec app composer install
 docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate
 docker-compose exec app php artisan db:seed
+docker-compose exec app php artisan l5-swagger:generate
 ```
 
 The api can be accessed at [http://127.0.0.1:8080/api](http://127.0.0.1:8080/api).
