@@ -6,7 +6,7 @@ Please check the official laravel installation guide for server requirements bef
 
 Alternative installation is possible without local dependencies relying on [Docker](#docker). 
 
-Access  documentation Swagger [here](http://127.0.0.1:8000/api/documentation).
+Access  documentation Swagger [here](http://127.0.0.1:8080/api/documentation).
 
 
 Clone the repository
@@ -54,7 +54,7 @@ Run the database seeder and you're done
 
     php artisan l5-swagger:generate
 
-You can now access the server at http://127.0.0.1:8000/api/documentation
+You can now access the server at http://127.0.0.1:8080/api/documentation
 
 **TL;DR command list**
 
@@ -74,7 +74,7 @@ You can now access the server at http://127.0.0.1:8000/api/documentation
 
 ## Documentation Swagger
 
-Access documentation [here](http://127.0.0.1:8000/api/documentation).
+Access documentation [here](http://127.0.0.1:8080/api/documentation).
 
 
 # Run Queue
@@ -124,4 +124,4 @@ The api can now be accessed at
     http://127.0.0.1:8080/api
 
 # Documentation
-API documentation can be found at [Swagger Documentation](http://127.0.0.1:8000/api/documentation)
+API documentation can be found at [Swagger Documentation](http://127.0.0.1:8080/api/documentation)
