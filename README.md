@@ -84,14 +84,14 @@ Access documentation [here](http://127.0.0.1:8000/api/documentation).
 
 # Run Command for generate the numbers winners
 
-    php artisan send:run-prize-draw
+    php artisan run:prize-draw
 
 
 # Run Command for generate the numbers winners seting the winning  code
 
-    php artisan send:run-prize-draw --code={ticketCode}
+    php artisan run:prize-draw --code={ticketCode}
 
-    **Example: php artisan send:run-prize-draw --code=1234-abcd**
+    **Example: php artisan run:prize-draw --code=1234-abcd**
     
 ## Docker
 

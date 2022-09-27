@@ -18,7 +18,7 @@ class StoreTicketRequest
      * @OA\Property(
      *      title="name",
      *      description="name of the new ticket",
-     *      example="A nice ticket"
+     *      example="John Doe"
      * )
      *
      * @var string

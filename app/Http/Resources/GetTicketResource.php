@@ -28,7 +28,7 @@ class GetTicketResource extends JsonResource
 
     public function getMachineNumbers()
     {
-        $drawing = PrizeDraw::find($this->drawing_id);
+        $drawing = PrizeDraw::find($this->prize_draw_id);
 
         if($drawing) {
             return [$drawing->n1, $drawing->n2, $drawing->n3, $drawing->n4, $drawing->n5, $drawing->n6];

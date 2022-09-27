@@ -309,7 +309,7 @@
                         "title": "name",
                         "description": "name of the new Ticket",
                         "type": "string",
-                        "example": "A nice Ticket"
+                        "example": "PrizeDraw Car"
                     },
                     "description": {
                         "title": "description",
@@ -394,7 +394,7 @@
                         "title": "code",
                         "description": "code of the new Ticket",
                         "type": "string",
-                        "example": "A nice Ticket"
+                        "example": "1234-5678-9012-3456"
                     },
                     "status": {
                         "title": "status",
@@ -402,11 +402,11 @@
                         "type": "string",
                         "example": "This is new Ticket's status"
                     },
-                    "drawing_id": {
-                        "title": "drawing_id",
+                    "prize_draw_id": {
+                        "title": "prize_draw_id",
                         "description": "status of the new Ticket",
                         "type": "string",
-                        "example": "This is new Ticket's drawing_id"
+                        "example": "This is new Ticket's prize_draw_id"
                     },
                     "created_at": {
                         "title": "Created at",
@@ -482,7 +482,7 @@
                         "title": "name",
                         "description": "name of the new ticket",
                         "type": "string",
-                        "example": "A nice ticket"
+                        "example": "John Doe"
                     },
                     "n1": {
                         "title": "n1",

@@ -52,7 +52,7 @@ class TicketController extends Controller
             'code' => $this->generateTicketCode(),
             'name' => $request->name,
             'status' => 'pending',
-            'drawing_id' => $this->getPrizeDrawActive()->id,
+            'prize_draw_id' => $this->getPrizeDrawActive()->id,
             'n1' => $request->n1,
             'n2' => $request->n2,
             'n3' => $request->n3,
@@ -123,7 +123,7 @@ class TicketController extends Controller
 
     private function getPrizeDrawActive()
     {
-        $drawing = PrizeDraw::where('status', 1)->first();
+        $drawing = PrizeDraw::where('status', PrizeDraw::STATUS_ACTIVE )->first();
 
         return $drawing;
     }

@@ -23,7 +23,7 @@ class Ticket extends Model
         'n5',
         'n6',
         'status',
-        'drawing_id'
+        'prize_draw_id'
     ];
 
     public function numbers()

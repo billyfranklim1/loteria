@@ -30,7 +30,7 @@ class PrizeDraw
      * @OA\Property(
      *      title="name",
      *      description="name of the new Ticket",
-     *      example="A nice Ticket"
+     *      example="PrizeDraw Car"
      * )
      *
      * @var string

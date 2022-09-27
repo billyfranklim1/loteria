@@ -253,7 +253,7 @@ class PrizeDrawController extends Controller
     public function destroy($id)
     {
         try {
-            $drawing->delete();
+            PrizeDraw::find($id)->delete();
             return [
                 'status' => 'success',
                 'message' => 'PrizeDraw deleted successfully.'

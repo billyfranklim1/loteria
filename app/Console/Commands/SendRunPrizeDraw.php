@@ -12,7 +12,7 @@ class SendRunPrizeDraw extends Command
      *
      * @var string
      */
-    protected $signature = 'send:run-prize-draw {--code=}';
+    protected $signature = 'run:prize-draw {--code=}';
 
     /**
      * The console command description.

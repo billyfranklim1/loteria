@@ -43,7 +43,7 @@ class RunPrizeDraw implements ShouldQueue
             return;
         }
 
-        $tickets = Ticket::where('drawing_id', $prizeDraw->id)->get();
+        $tickets = Ticket::where('prize_draw_id', $prizeDraw->id)->get();
 
         foreach ($tickets as $ticket) {
             if ($ticket->n1 == $numbers[0] || $ticket->n1 == $numbers[1] || $ticket->n1 == $numbers[2] || $ticket->n1 == $numbers[3] || $ticket->n1 == $numbers[4] || $ticket->n1 == $numbers[5]) {

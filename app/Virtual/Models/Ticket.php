@@ -29,7 +29,7 @@ class Ticket
      * @OA\Property(
      *      title="code",
      *      description="code of the new Ticket",
-     *      example="A nice Ticket"
+     *      example="1234-5678-9012-3456"
      * )
      *
      * @var string
@@ -50,14 +50,14 @@ class Ticket
 
     /**
      * @OA\Property(
-     *      title="drawing_id",
+     *      title="prize_draw_id",
      *      description="status of the new Ticket",
-     *      example="This is new Ticket's drawing_id"
+     *      example="This is new Ticket's prize_draw_id"
      * )
      *
      * @var string
      */
-    public $drawing_id;
+    public $prize_draw_id;
 
 
     /**
