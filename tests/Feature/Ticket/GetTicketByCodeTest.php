@@ -31,6 +31,12 @@ class GetTicketByCodeTest extends TestCase
      */
     private function createTicketForTest()
     {
+        $prizeDraw = PrizeDraw::where('status', PrizeDraw::STATUS_ACTIVE)->first();
+        if (!$prizeDraw) {
+            $prizeDraw = PrizeDraw::factory()->create(['status' => PrizeDraw::STATUS_ACTIVE]);
+        }
+
+
         $url = self::CREATE_TICKET_ROUTE;
         $data = [
             'name' => 'John Doe',

@@ -147,6 +147,9 @@ class SaveCreateTicketTest extends TestCase
      */
     public function testSuccessSave()
     {
+
+        $this->createFactoryForTest();
+
         $url = self::CREATE_TICKET_ROUTE;
         $data = [
             'name' => 'John Doe',
